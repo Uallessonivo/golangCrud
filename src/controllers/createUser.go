@@ -5,8 +5,8 @@ import (
 
 	"github.com/Uallessonivo/golangCrud/src/configuration/logger"
 	"github.com/Uallessonivo/golangCrud/src/configuration/validations"
-	"github.com/Uallessonivo/golangCrud/src/models/requests"
-	"github.com/Uallessonivo/golangCrud/src/models/responses"
+	"github.com/Uallessonivo/golangCrud/src/controllers/models/requests"
+	"github.com/Uallessonivo/golangCrud/src/models"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -25,14 +25,14 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	response := responses.UserResponse{
-		ID:    "test",
-		Email: userRequest.Email,
-		Name:  userRequest.Name,
-		Age:   userRequest.Age,
+	domain := models.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
+
+	if err := domain.CreateUser(); err != nil {
+		c.JSON(err.Code, err)
+		return
 	}
 
 	logger.Info("User created successfully", zap.String("journey", "create_user"))
 
-	c.JSON(http.StatusOK, response)
+	c.String(http.StatusOK, "")
 }
