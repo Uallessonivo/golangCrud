@@ -1,4 +1,4 @@
-package models
+package services
 
 import (
 	"github.com/Uallessonivo/golangCrud/src/configuration/logger"
@@ -6,7 +6,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func (ud *UserDomain) UpdateUser(string) *rest_errors.RestErr {
-	logger.Info("Init UpdateUser model", zap.String("journey", "update_user"))
+func (ud *userDomainService) DeleteUser(string) *rest_errors.RestErr {
+	logger.Info("Init DeleteUser model", zap.String("journey", "delete_user"))
 	return nil
 }

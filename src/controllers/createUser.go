@@ -7,6 +7,7 @@ import (
 	"github.com/Uallessonivo/golangCrud/src/configuration/validations"
 	"github.com/Uallessonivo/golangCrud/src/controllers/models/requests"
 	"github.com/Uallessonivo/golangCrud/src/models"
+	"github.com/Uallessonivo/golangCrud/src/models/services"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -27,7 +28,9 @@ func CreateUser(c *gin.Context) {
 
 	domain := models.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
 
-	if err := domain.CreateUser(); err != nil {
+	service := services.NewUserDomainService()
+
+	if err := service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
