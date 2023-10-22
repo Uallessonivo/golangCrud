@@ -6,9 +6,7 @@ import (
 )
 
 func NewUserDomainService() UserDomainService {
-	return &userDomainService{
-		
-	}
+	return &userDomainService{}
 }
 
 type userDomainService struct {
