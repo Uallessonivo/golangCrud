@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/Uallessonivo/golangCrud/src/configuration/database/mongodb"
 	"github.com/Uallessonivo/golangCrud/src/controllers"
 	"github.com/Uallessonivo/golangCrud/src/controllers/routes"
 	"github.com/Uallessonivo/golangCrud/src/models/services"
@@ -16,6 +17,9 @@ func main() {
 	if err != nil {
 		fmt.Println("Error loading .env file")
 	}
+
+	// Init database connection
+	mongodb.InitConnection()
 
 	// Init dependencies
 	service := services.NewUserDomainService()
